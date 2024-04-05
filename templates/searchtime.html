@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>SearchSubs</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading-1">Search Subtitles Here</h1><a href="/vidupload/" class="btn btn-primary">Back to Upload</a>
+        <form id="searchform" action="" method="post"> {%csrf_token%}
+            <fieldset>
+                <div class="form-group">
+                    <label for="TextInput">Subtitle Text</label>
+                    <input type="text" id="TextInput" class="form-control" placeholder="Enter Subtitle Keyword Here" name="query">
+                </div>
+                <button class="btn btn-primary" onclick="reloadlist()" type="button">Refresh List</button>
+                <div class="form-group">
+                    <label for="Select">Select Video File</label><br>
+                    <select id="Select" class="form-control" name="file">
+                        {% for vidname in vidlist %}
+                        <option>{{vidname}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="document.getElementById('searchform').submit()" onsubmit="showtime()">Search</button>
+            </fieldset>
+        </form>
+    </div>
+    <div class="container">
+        <h1>Time For Keyword</h1>
+        <div>
+            <ul>
+                {% for time in timelist %}
+                <li>{{time}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+<script>
+    function reloadlist(){
+        var list=document.getElementById('Select');
+        var listcontent=list.innerHTML;
+        list=listcontent;
+    }
+</script>
+</html>
